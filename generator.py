@@ -1,5 +1,5 @@
-# Note for Future Nishant -- Seeded random data generator for simulation test cases.
-# Builds initial lists of 20 vehicles partitioned across 4 quadrants and 100 emergency incidents.
+# Note for Future Nishant - seeded random data generator for simulation test cases.
+# builds initial lists of 20 vehicles partitioned across 4 quadrants and 100 emergency incidents.
 
 import numpy as np
 from models import Vehicle, Incident

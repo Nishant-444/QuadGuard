@@ -1,5 +1,5 @@
-# Note for Future Nishant -- Core data models for the QuadGuard simulation.
-# Defines Vehicle, Incident, and Assignment dataclasses used across dispatcher and simulator modules.
+# Note for Future Nishant - core data models for the QuadGuard simulation.
+# defines Vehicle, Incident, and Assignment dataclasses used across dispatcher and simulator modules.
 
 from dataclasses import dataclass
 from typing import Optional
@@ -10,7 +10,7 @@ class Vehicle:
     x: float
     y: float
     idle: bool
-    completion_time: Optional[float]   # None while idle
+    completion_time: Optional[float]   # none while idle
 
 @dataclass
 class Incident:
@@ -19,7 +19,7 @@ class Incident:
     x: float
     y: float
     priority: int          # 1, 2, or 3
-    weight: int             # 1, 3, or 7 — derived from priority, see SPEC §1.3
+    weight: int             # 1, 3, or 7
 
 @dataclass
 class Assignment:

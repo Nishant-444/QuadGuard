@@ -1,5 +1,5 @@
-# Note for Future Nishant -- Evaluation and scoring computer for simulation runs.
-# Calculates weighted response times, P3 incident statistics, total outages, and runtime metrics.
+# Note for Future Nishant - evaluation and scoring computer for simulation runs.
+# calculates weighted response times, p3 incident statistics, total outages, and runtime metrics.
 
 from models import Assignment, Incident
 

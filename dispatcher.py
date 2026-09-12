@@ -1,5 +1,5 @@
-# Note for Future Nishant -- Optimization dispatcher logic using scipy linear_sum_assignment.
-# Solves Hungarian matching with dummy columns, coverage guard penalties, and repair pass filtering.
+# Note for Future Nishant - optimization dispatcher logic using scipy linear_sum_assignment.
+# solves hungarian matching with dummy columns, coverage guard penalties, and repair pass filtering.
 
 import math
 import numpy as np

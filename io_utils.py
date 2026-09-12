@@ -1,5 +1,5 @@
-# Note for Future Nishant -- Input/Output utility module for exporting simulation output.
-# Handles saving incident assignment logs to CSV and aggregate summary statistics to JSON.
+# Note for Future Nishant - i/o utility module for exporting simulation output.
+# handles saving incident assignment logs to CSV and aggregate summary statistics to JSON.
 
 import json
 import csv

@@ -1,5 +1,5 @@
-# Note for Future Nishant -- Spatial helper module for 2D quadrant calculations.
-# Maps (x, y) coordinates to quadrant indices 0..3 for regional coverage tracking.
+# Note for Future Nishant - spatial helper module for 2D quadrant calculations.
+# maps (x, y) coordinates to quadrant indices 0..3 for regional coverage tracking.
 
 def quadrant(x: float, y: float) -> int:
     """

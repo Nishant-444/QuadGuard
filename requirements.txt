@@ -1,5 +1,5 @@
-# Note for Future Nishant -- Project dependency specification file.
-# Lists core Python library requirements including numpy, scipy, pandas, and matplotlib.
+# Note for Future Nishant - project dependency specification file.
+# lists core python library requirements including numpy, scipy, pandas, and matplotlib.
 
 numpy>=2.5
 scipy>=1.18

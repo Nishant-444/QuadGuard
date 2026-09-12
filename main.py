@@ -1,5 +1,5 @@
-# Note for Future Nishant -- CLI entry point for running QuadGuard simulations and comparison benchmarks.
-# Parses arguments, runs primary and benchmark simulation passes, and outputs CSV/JSON/PNG results.
+# Note for Future Nishant - entry point for running QuadGuard simulations and comparison benchmarks.
+# parses arguments, runs primary and benchmark simulation passes, and outputs CSV/JSON/PNG results.
 
 import argparse
 import os
