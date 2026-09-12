@@ -10,7 +10,7 @@
 **Version:** 1.0.0  
 **Status:** Validated & Benchmarked  
 **Core Domain:** Online Bipartite Matching, Emergency Fleet Optimization, Spatial Coverage Protection  
-**Tech Stack:** Python 3.10+, NumPy, SciPy (`linear_sum_assignment`), Matplotlib, Pandas  
+**Tech Stack:** Python 3.10+, NumPy, SciPy (`linear_sum_assignment`), Matplotlib, Pandas
 
 ---
 
@@ -60,14 +60,14 @@ Incident Arrival Queue ──► Per-Minute Loop (t = 0..120) ──► Guarded 
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-3.10+-11557c?style=flat-square)
 ![Pandas](https://img.shields.io/badge/Pandas-2.2+-150458?style=flat-square&logo=pandas&logoColor=white)
 
-| Layer | Technology | Version | Purpose |
-| --- | --- | --- | --- |
-| **Language** | Python | $\ge$ 3.10 | Core execution & native generic typing (`list[X]`) |
-| **Optimization Solver** | SciPy | $\ge$ 1.18 | `scipy.optimize.linear_sum_assignment` (Hungarian matching) |
-| **RNG & Simulation** | NumPy | $\ge$ 2.5 | Bit-generator seed consistency (`PCG64`) |
-| **Data Export** | Built-in `csv` / `json` | Standard | Standardized results format (SPEC §8) |
-| **Data Analysis** | Pandas | $\ge$ 2.2 | Metric aggregation and output processing |
-| **Visualization** | Matplotlib | $\ge$ 3.10 | Guard-ON vs Guard-OFF comparison chart generation |
+| Layer                   | Technology              | Version    | Purpose                                                     |
+| ----------------------- | ----------------------- | ---------- | ----------------------------------------------------------- |
+| **Language**            | Python                  | $\ge$ 3.10 | Core execution & native generic typing (`list[X]`)          |
+| **Optimization Solver** | SciPy                   | $\ge$ 1.18 | `scipy.optimize.linear_sum_assignment` (Hungarian matching) |
+| **RNG & Simulation**    | NumPy                   | $\ge$ 2.5  | Bit-generator seed consistency (`PCG64`)                    |
+| **Data Export**         | Built-in `csv` / `json` | Standard   | Standardized results format (SPEC §8)                       |
+| **Data Analysis**       | Pandas                  | $\ge$ 2.2  | Metric aggregation and output processing                    |
+| **Visualization**       | Matplotlib              | $\ge$ 3.10 | Guard-ON vs Guard-OFF comparison chart generation           |
 
 ---
 
@@ -92,7 +92,7 @@ $$\text{Cost Matrix Structure} = \begin{bmatrix} \text{Dummy Block } (V \times V
 
 ### 3. Repair Pass for Simultaneous Departures
 
-When a quadrant has 2+ idle units, single-vehicle checks (`quad_counts == 1`) won't trigger for individual units. If the bipartite matching assigns *all* idle units in that quadrant simultaneously in the same minute step, `repair_pass` identifies the batch departure and drops the lowest-priority assignment, keeping at least 1 vehicle in idle coverage.
+When a quadrant has 2+ idle units, single-vehicle checks (`quad_counts == 1`) won't trigger for individual units. If the bipartite matching assigns _all_ idle units in that quadrant simultaneously in the same minute step, `repair_pass` identifies the batch departure and drops the lowest-priority assignment, keeping at least 1 vehicle in idle coverage.
 
 ---
 
@@ -100,14 +100,15 @@ When a quadrant has 2+ idle units, single-vehicle checks (`quad_counts == 1`) wo
 
 The priority bonus parameter $\lambda$ balances travel distance against incident weight. A parameter sweep was executed over $\lambda \in \{1.0, 3.0, 5.0, 10.0\}$ on the development instance (`seed = 20260911`):
 
-| $\lambda$ | Weighted Response Time (min) | Coverage Outage Minutes | P3 Response Time (min) | Incidents Served |
-| :---: | :---: | :---: | :---: | :---: |
-| **1.0** | 21.5835 | 34 | 31.9897 | 94 / 100 |
-| **3.0** | 19.8853 | 34 | 31.2519 | 95 / 100 |
-| **5.0 (Selected)** | **20.3313** | **30** | **29.4511** | **91 / 100** |
-| **10.0** | 20.5487 | 30 | 29.7263 | 89 / 100 |
+|     $\lambda$      | Weighted Response Time (min) | Coverage Outage Minutes | P3 Response Time (min) | Incidents Served |
+| :----------------: | :--------------------------: | :---------------------: | :--------------------: | :--------------: |
+|      **1.0**       |           21.5835            |           34            |        31.9897         |     94 / 100     |
+|      **3.0**       |           19.8853            |           34            |        31.2519         |     95 / 100     |
+| **5.0 (Selected)** |         **20.3313**          |         **30**          |      **29.4511**       |   **91 / 100**   |
+|      **10.0**      |           20.5487            |           30            |        29.7263         |     89 / 100     |
 
 ### Selection Rationale:
+
 - **Baseline Outage Target**: $\lambda = 5.0$ minimizes coverage outage minutes to **30 minutes**.
 - **P3 Efficiency**: $\lambda = 5.0$ achieves the fastest Priority-3 response time (**29.45 min**).
 - **System Default**: Hard-coded as the default parameter across the system.
@@ -118,12 +119,12 @@ The priority bonus parameter $\lambda$ balances travel distance against incident
 
 Comparing QuadGuard (Guard ON, $\lambda = 5.0$) against an un-guarded baseline dispatcher (Guard OFF, $\lambda = 5.0$) on identical environment instances:
 
-| Metric | Guard ON (QuadGuard) | Guard OFF (Baseline) | Performance Impact |
-| --- | :---: | :---: | --- |
-| **Coverage Outage Minutes** | **30 min** | **119 min** | **74.8% Reduction in Outages** |
-| **Total Incidents Served** | 91 / 100 | 98 / 100 | High Coverage Preserved |
-| **P3 Response Time** | **29.45 min** | 35.81 min | **17.8% Faster P3 Response** |
-| **Simulation Runtime** | ~0.01 sec | ~0.01 sec | Real-Time Sub-Millisecond |
+| Metric                      | Guard ON (QuadGuard) | Guard OFF (Baseline) | Performance Impact             |
+| --------------------------- | :------------------: | :------------------: | ------------------------------ |
+| **Coverage Outage Minutes** |      **30 min**      |     **119 min**      | **74.8% Reduction in Outages** |
+| **Total Incidents Served**  |       91 / 100       |       98 / 100       | High Coverage Preserved        |
+| **P3 Response Time**        |    **29.45 min**     |      35.81 min       | **17.8% Faster P3 Response**   |
+| **Simulation Runtime**      |      ~0.01 sec       |      ~0.01 sec       | Real-Time Sub-Millisecond      |
 
 ---
 
@@ -141,10 +142,14 @@ QuadGuard/
 ├── io_utils.py        # Standardized CSV & JSON export writers (SPEC §8)
 ├── visualize.py       # Guard-ON vs Guard-OFF outage comparison chart generator
 ├── requirements.txt   # Core Python library dependencies
+├── WRITEUP.md         # Technical writeup and benchmark analysis
 ├── docs/
 │   ├── SPEC.md        # Technical specification, math formulations & worked examples
 │   ├── ARCHITECTURE.md# Module layout, function signatures & execution sequence
-│   └── TASKS.md       # Development step checklist & verification criteria
+│   ├── TASKS.md       # Development step checklist & verification criteria
+│   ├── walkthrough.md # Walkthrough & demonstration guide
+│   ├── requirements.txt# Documentation dependencies
+│   └── Applied_AI_Intelligent_Systems.pdf # Project reference document
 └── results/           # Runtime output directory (CSV, JSON, PNG)
 ```
 
@@ -172,12 +177,12 @@ python main.py --seed 20260911 --out results/
 
 ### 3. Command Line Options
 
-| Flag | Default | Type | Description |
-| --- | --- | --- | --- |
-| `--seed` | `20260911` | `int` | RNG seed for PCG64 reproducible environment generation |
-| `--lam` | `5.0` | `float` | Priority bonus weight multiplier ($\lambda$) in cost calculation |
-| `--no-guard` | `off` | `flag` | Disables coverage guard on the primary run (for comparison) |
-| `--out` | `results/` | `str` | Destination directory for output metrics, CSV logs, and chart |
+| Flag         | Default    | Type    | Description                                                      |
+| ------------ | ---------- | ------- | ---------------------------------------------------------------- |
+| `--seed`     | `20260911` | `int`   | RNG seed for PCG64 reproducible environment generation           |
+| `--lam`      | `5.0`      | `float` | Priority bonus weight multiplier ($\lambda$) in cost calculation |
+| `--no-guard` | `off`      | `flag`  | Disables coverage guard on the primary run (for comparison)      |
+| `--out`      | `results/` | `str`   | Destination directory for output metrics, CSV logs, and chart    |
 
 ### 4. Sample Console Output
 
@@ -196,15 +201,15 @@ Wrote results/assignments.csv, results/metrics.json, results/coverage_comparison
 
 Running the simulation generates the following artifacts in the specified `--out` directory (default `results/`):
 
-1. **`results/assignments.csv`**: Record of all dispatched incidents (schema: `incident_id, priority, arrival_min, vehicle_id, dispatch_min, arrival_at_incident_min, response_time`).
-2. **`results/metrics.json`**: Aggregate scoring summary containing `weighted_response_time`, `coverage_outage_minutes`, `p3_response_time`, `runtime_sec`, `total_served`, and `total_queued_at_end`.
-3. **`results/coverage_comparison.png`**: Side-by-side comparative bar chart demonstrating total outage minutes with Guard ON vs. Guard OFF.
+1. **[`results/assignments.csv`](file:///home/nishant/Code/QuadGuard/results/assignments.csv)**: Record of all dispatched incidents (schema: `incident_id, priority, arrival_min, vehicle_id, dispatch_min, arrival_at_incident_min, response_time`).
+2. **[`results/metrics.json`](file:///home/nishant/Code/QuadGuard/results/metrics.json)**: Aggregate scoring summary containing `weighted_response_time`, `coverage_outage_minutes`, `p3_response_time`, `runtime_sec`, `total_served`, and `total_queued_at_end`.
+3. **[`results/coverage_comparison.png`](file:///home/nishant/Code/QuadGuard/results/coverage_comparison.png)**: Side-by-side comparative bar chart demonstrating total outage minutes with Guard ON vs. Guard OFF.
 
 ---
 
 ## Verification & Unit Testing
 
-QuadGuard includes a hand-verifiable worked example test case in [`docs/SPEC.md`](file:///home/nishant/Code/QuadGuard/docs/SPEC.md#L171-L189):
+QuadGuard includes a hand-verifiable worked example test case in [`docs/SPEC.md`](file:///home/nishant/Code/QuadGuard/docs/SPEC.md#L190-L212):
 
 - **Setup**: 3 vehicles ($V_0=(10,10)$, $V_2=(12,12)$ in SW; $V_1=(60,60)$ alone in NE). 2 priority-1 incidents ($I_0=(15,15)$, $I_1=(5,5)$) revealed at $t=0$. $\lambda=5$.
 - **Expected Matching**: $V_2 \rightarrow I_0$, $V_0 \rightarrow I_1$, $V_1 \rightarrow \text{dummy}$ (stay idle to preserve NE coverage).
