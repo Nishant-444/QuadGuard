@@ -1,4 +1,4 @@
-// QuadGuard Interactive Simulation & Visualization Engine (Minimalist Black & White)
+// QuadGuard Interactive Simulation & Visualization Engine (Black & White, Poppins Font)
 
 class QuadGuardApp {
   constructor() {
@@ -134,7 +134,7 @@ class QuadGuardApp {
 
   async fetchSimulation(seed, lam) {
     this.btnRunSim.disabled = true;
-    this.btnRunSim.innerHTML = '<span class="btn-icon">⌛</span> Running...';
+    this.btnRunSim.textContent = 'Running...';
 
     try {
       const response = await fetch('/api/run-simulation', {
@@ -154,7 +154,7 @@ class QuadGuardApp {
       alert("Error fetching simulation data from backend. Ensure server.py is running.");
     } finally {
       this.btnRunSim.disabled = false;
-      this.btnRunSim.innerHTML = '<span class="btn-icon">▶</span> Re-Run Simulation';
+      this.btnRunSim.textContent = 'Re-Run Simulation';
     }
   }
 
@@ -183,10 +183,10 @@ class QuadGuardApp {
   togglePlayPause() {
     this.isPlaying = !this.isPlaying;
     if (this.isPlaying) {
-      this.btnPlayPause.textContent = '⏸ Pause';
+      this.btnPlayPause.textContent = 'Pause';
       this.restartPlayLoop();
     } else {
-      this.btnPlayPause.textContent = '▶ Play';
+      this.btnPlayPause.textContent = 'Play';
       if (this.animTimer) clearInterval(this.animTimer);
     }
   }
@@ -344,8 +344,8 @@ class QuadGuardApp {
       }
     });
 
-    // Quadrant Labels
-    ctx.font = '600 12px JetBrains Mono';
+    // Quadrant Labels (Poppins Font)
+    ctx.font = '600 12px Poppins, sans-serif';
     ctx.fillStyle = '#a3a3a3';
     ctx.fillText('Q1 (NW)', 12, 24);
     ctx.fillText('Q3 (NE)', width - 70, 24);

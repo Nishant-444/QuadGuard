@@ -6,7 +6,7 @@
   <title>QuadGuard — Emergency Dispatcher & Coverage Visualizer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,15 +28,12 @@
       </div>
       <div class="header-badges">
         <div class="header-badge success">
-          <span class="badge-icon">🛡️</span>
           <span><strong>74.8%</strong> Outage Reduction</span>
         </div>
         <div class="header-badge info">
-          <span class="badge-icon">⚡</span>
           <span><strong>&lt; 1 ms</strong> Real-Time Step</span>
         </div>
         <div class="header-badge warning">
-          <span class="badge-icon">⏱️</span>
           <span>Strict Causality (t=0..120)</span>
         </div>
       </div>
@@ -48,7 +45,7 @@
         <label for="seed-input">RNG Seed:</label>
         <div class="input-with-btn">
           <input type="number" id="seed-input" value="20260911" class="styled-input">
-          <button id="btn-rand-seed" class="btn btn-secondary" title="Random Seed">🎲 Random</button>
+          <button id="btn-rand-seed" class="btn btn-secondary" title="Random Seed">Random</button>
         </div>
       </div>
 
@@ -68,7 +65,7 @@
 
       <div class="control-group primary-action">
         <button id="btn-run-sim" class="btn btn-primary">
-          <span class="btn-icon">▶</span> Re-Run Simulation
+          Re-Run Simulation
         </button>
       </div>
     </section>
@@ -76,9 +73,9 @@
     <!-- Playback Timeline Bar -->
     <section class="playback-bar">
       <div class="playback-controls">
-        <button id="btn-prev-step" class="btn-icon-only" title="Previous Minute">⏮</button>
-        <button id="btn-play-pause" class="btn-play" title="Play / Pause">▶ Play</button>
-        <button id="btn-next-step" class="btn-icon-only" title="Next Minute">⏭</button>
+        <button id="btn-prev-step" class="btn-icon-only" title="Previous Minute">Prev</button>
+        <button id="btn-play-pause" class="btn-play" title="Play / Pause">Play</button>
+        <button id="btn-next-step" class="btn-icon-only" title="Next Minute">Next</button>
       </div>
 
       <div class="timeline-container">
@@ -134,7 +131,6 @@
           <canvas id="canvas-guard-on" width="550" height="550"></canvas>
           <div class="outage-overlay" id="overlay-guard-on">
             <div class="outage-alert-box">
-              <span class="alert-icon">⚠️</span>
               <span>COVERAGE OUTAGE IN PROGRESS</span>
             </div>
           </div>
@@ -175,7 +171,6 @@
           <canvas id="canvas-guard-off" width="550" height="550"></canvas>
           <div class="outage-overlay" id="overlay-guard-off">
             <div class="outage-alert-box">
-              <span class="alert-icon">⚠️</span>
               <span>COVERAGE OUTAGE IN PROGRESS</span>
             </div>
           </div>
@@ -327,7 +322,6 @@
     <section class="tech-explainer">
       <div class="explainer-card">
         <div class="explainer-header">
-          <span class="explainer-icon">🧠</span>
           <h3>Guarded Bipartite Matching Formulation</h3>
         </div>
         <p>QuadGuard solves an online $V \times (V + I)$ bipartite matching matrix at every minute step using <strong>SciPy Hungarian assignment</strong>:</p>
@@ -343,7 +337,6 @@
 
       <div class="explainer-card">
         <div class="explainer-header">
-          <span class="explainer-icon">⚡</span>
           <h3>Multi-Vehicle Simultaneous Repair Pass</h3>
         </div>
         <p>Single-unit checks (<code>quad_counts == 1</code>) don't trigger when a quadrant has 2+ idle units. If the assignment solver attempts to dispatch <em>all</em> idle units in a single minute step:</p>

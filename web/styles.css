@@ -1,4 +1,4 @@
-/* QuadGuard - Simple Black & White Minimalist Theme */
+/* QuadGuard - Simple Black & White Minimalist Theme (Poppins Font) */
 
 :root {
   --bg-main: #050505;
@@ -11,7 +11,7 @@
   --text-muted: #a3a3a3;
   --text-dim: #737373;
 
-  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --radius-sm: 4px;
@@ -95,7 +95,6 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
-
 }
 
 .badge-v {
@@ -285,11 +284,13 @@ h1 {
   background: #000000;
   border: 1px solid var(--border-card);
   color: var(--text-main);
-  width: 36px;
+  padding: 6px 14px;
   height: 36px;
   border-radius: var(--radius-md);
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-main);
 }
 
 .btn-icon-only:hover {
